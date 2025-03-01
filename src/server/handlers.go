@@ -32,6 +32,7 @@ func (s *Server) LoginHandler() http.HandlerFunc {
 			return
 		}
 
+		// todo: validate request and implement actual logic for registration
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(req)
