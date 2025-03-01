@@ -35,6 +35,7 @@ func NewServer(opts ...Option) *Server {
 	if s.authService == nil {
 		panic("auth service is required")
 	}
+	s.RegisterRoutes()
 
 	return s
 }
