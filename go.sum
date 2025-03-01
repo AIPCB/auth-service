@@ -1,2 +1,4 @@
+github.com/exception-raised/validation-module v0.0.1 h1:KBf+85ISrWnnWIHhyqDSjdaRPzy5ICN+9lzMO/snFhE=
+github.com/exception-raised/validation-module v0.0.1/go.mod h1:i1qu2YAWuQopIgZIc8lX/kGoo5akPvjZa7LoEHF9bQM=
 github.com/gorilla/mux v1.8.1 h1:TuBL49tXwgrFYWhqrNgrUNEY92u81SPhu7sTdzQEiWY=
 github.com/gorilla/mux v1.8.1/go.mod h1:AKf9I4AEqPTmMytcMc0KkNouC66V3BtZ4qD5fmWSiMQ=
