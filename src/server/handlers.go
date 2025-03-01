@@ -16,7 +16,13 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 			return
 		}
 
-		// todo: validate request and implement actual logic for registration
+		errorMsg := req.Validate()
+		if errorMsg != "" {
+			http.Error(w, errorMsg, http.StatusBadRequest)
+			return
+		}
+
+		// todo: implement actual logic for registration
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(req)
@@ -32,7 +38,13 @@ func (s *Server) LoginHandler() http.HandlerFunc {
 			return
 		}
 
-		// todo: validate request and implement actual logic for login
+		errorMsg := req.Validate()
+		if errorMsg != "" {
+			http.Error(w, errorMsg, http.StatusBadRequest)
+			return
+		}
+
+		// todo: implement actual logic for login
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(req)
