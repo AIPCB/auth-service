@@ -36,7 +36,9 @@ func Execute() {
 		log.Fatalf("Failed to open database: %+v", err)
 	}
 
-	db.AutoMigrate(&models.User{})
+	if err := db.AutoMigrate(&models.User{}); err != nil {
+		log.Fatalf("Failed to migrate database: %+v", err)
+	}
 
 	authService := service.NewAuthService(service.WithRepo(repo.NewPostgresRepo(db)))
 
