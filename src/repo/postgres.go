@@ -1,11 +1,13 @@
 package repo
 
-import "database/sql"
+import (
+	"gorm.io/gorm"
+)
 
 type PostgresRepo struct {
-	db *sql.DB
+	db *gorm.DB
 }
 
-func NewPostgresRepo(db *sql.DB) *PostgresRepo {
+func NewPostgresRepo(db *gorm.DB) *PostgresRepo {
 	return &PostgresRepo{db: db}
 }
