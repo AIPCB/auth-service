@@ -31,7 +31,7 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 		}
 
 		response := models.RegisterResponse{
-			Message: fmt.Sprintf("user created with username: %s email: %s password: %s", user.Username, user.Email, user.Password),
+			Message: fmt.Sprintf("Successfully registered user %s", user.Username),
 		}
 
 		w.Header().Set("Content-Type", "application/json")
