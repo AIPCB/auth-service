@@ -1,9 +1,11 @@
 package service
 
-import "github.com/AIPCB/auth-service/src/repo"
+import (
+	"github.com/AIPCB/auth-service/src/storage"
+)
 
 type AuthService struct {
-	repo repo.AuthRepo
+	storage storage.Client
 }
 
 func NewAuthService(options ...Option) *AuthService {
