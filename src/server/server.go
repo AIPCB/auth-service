@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/AIPCB/auth-service/src/service"
+	"github.com/AIPCB/auth-service/src/storage"
 	"github.com/gorilla/mux"
 )
 
@@ -16,6 +17,7 @@ type Server struct {
 	httpwritetimeout time.Duration
 
 	authService *service.AuthService
+	storage     storage.Client
 }
 
 func NewServer(opts ...Option) *Server {
