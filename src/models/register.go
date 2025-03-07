@@ -6,9 +6,11 @@ import (
 
 type RegisterRequest struct {
 	Email    string `json:"email"`
+	Username string `json:"username"`
 	Password string `json:"password"`
 }
 
+// TODO: validate username
 func (rr *RegisterRequest) Validate() string {
 	if !validator.IsValidEmail(rr.Email) {
 		return "Invalid email"
@@ -19,4 +21,8 @@ func (rr *RegisterRequest) Validate() string {
 	}
 
 	return ""
+}
+
+type RegisterResponse struct {
+	Message string `json:"message"`
 }
