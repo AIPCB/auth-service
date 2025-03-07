@@ -2,19 +2,18 @@ package cmd
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/AIPCB/auth-service/src/models"
-	"github.com/AIPCB/auth-service/src/repo"
 	"github.com/AIPCB/auth-service/src/server"
 	"github.com/AIPCB/auth-service/src/service"
+	"github.com/AIPCB/auth-service/src/storage"
 	"github.com/joho/godotenv"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	_ "github.com/lib/pq"
 )
 
 // TODO: Break up into smaller pieces
@@ -30,20 +29,25 @@ func Execute() {
 	// TODO: abstract, use secure connection
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
 		os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"), os.Getenv("DB_SSLMODE"))
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
+	db, err := sql.Open("postgres", dsn)
+	if err != nil {
+		log.Fatalf("Failed to open database: %+v", err)
+	}
+	defer db.Close()
+
+	err = db.Ping()
 	if err != nil {
 		log.Fatalf("Failed to open database: %+v", err)
 	}
 
-	if err := db.AutoMigrate(&models.User{}); err != nil {
-		log.Fatalf("Failed to migrate database: %+v", err)
-	}
-
-	authService := service.NewAuthService(service.WithRepo(repo.NewPostgresRepo(db)))
+	authService := service.NewAuthService()
 
 	s := server.NewServer(
 		server.WithAuthService(authService),
+		server.WithStorage(
+			storage.NewStorageClient(db),
+		),
 	)
 
 	go func() {
