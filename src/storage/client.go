@@ -20,7 +20,7 @@ func NewClient(opts ...Option) (*Client, error) {
 	}
 
 	if c.db == nil {
-		return nil, fmt.Errorf("client: missing queries in options")
+		return nil, fmt.Errorf("storage: missing queries in options")
 	}
 
 	return c, nil

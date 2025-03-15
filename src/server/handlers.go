@@ -27,6 +27,7 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 
 		user, err := s.authService.RegisterUser(r.Context(), sqlc.CreateUserParams{
 			Username: req.Username,
+			Email:    req.Email,
 			Password: req.Password,
 		})
 		if err != nil {
