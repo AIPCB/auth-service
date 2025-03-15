@@ -31,7 +31,7 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 			Password: req.Password,
 		})
 		if err != nil {
-			http.Error(w, "internal server error ", http.StatusInternalServerError)
+			http.Error(w, "internal server error", http.StatusInternalServerError)
 			return
 		}
 
