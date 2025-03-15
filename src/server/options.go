@@ -7,7 +7,7 @@ import (
 
 type Option func(*Server)
 
-func WithAuthService(authService *service.AuthService) Option {
+func WithAuthService(authService *service.Service) Option {
 	return func(server *Server) {
 		server.authService = authService
 	}

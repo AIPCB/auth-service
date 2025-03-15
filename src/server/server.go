@@ -16,7 +16,7 @@ type Server struct {
 	httpreadtimeout  time.Duration
 	httpwritetimeout time.Duration
 
-	authService *service.AuthService
+	authService *service.Service
 	storage     storage.Client
 }
 

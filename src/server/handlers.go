@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/AIPCB/auth-service/src/models"
+	"github.com/AIPCB/auth-service/src/sqlc"
 )
 
 // TODO: Prevent duplicate records
@@ -24,9 +25,12 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 			return
 		}
 
-		user, err := s.storage.CreateUser(r.Context(), req.Email, req.Username, req.Password)
+		user, err := s.authService.RegisterUser(r.Context(), sqlc.CreateUserParams{
+			Username: req.Username,
+			Password: req.Password,
+		})
 		if err != nil {
-			http.Error(w, "internal server error", http.StatusInternalServerError)
+			http.Error(w, "internal server error ", http.StatusInternalServerError)
 			return
 		}
 

@@ -1,17 +1,14 @@
-package cmd
+package server
 
 import (
 	"context"
-	"database/sql"
-	"fmt"
 	"log"
-	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/AIPCB/auth-service/src/cmd/config"
 	"github.com/AIPCB/auth-service/src/server"
 	"github.com/AIPCB/auth-service/src/service"
-	"github.com/AIPCB/auth-service/src/storage"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -26,28 +23,17 @@ func Execute() {
 		log.Fatal("Error loading .env file")
 	}
 
-	// TODO: abstract, use secure connection
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
-		os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"), os.Getenv("DB_SSLMODE"))
-
-	db, err := sql.Open("postgres", dsn)
+	storageClient, err := config.NewStorageClient(ctx)
 	if err != nil {
-		log.Fatalf("Failed to open database: %+v", err)
-	}
-	defer db.Close()
-
-	err = db.Ping()
-	if err != nil {
-		log.Fatalf("Failed to open database: %+v", err)
+		log.Fatalf("Failed to create storage client: %+v", err)
 	}
 
-	authService := service.NewAuthService()
+	authService := service.NewService(
+		service.WithStorage(storageClient),
+	)
 
 	s := server.NewServer(
 		server.WithAuthService(authService),
-		server.WithStorage(
-			storage.NewStorageClient(db),
-		),
 	)
 
 	go func() {
