@@ -1,10 +1,8 @@
 package storage
 
 import (
-	"context"
 	"fmt"
 
-	"github.com/AIPCB/auth-service/src/sqlc"
 	"github.com/AIPCB/auth-service/src/storage/database"
 )
 
@@ -24,8 +22,4 @@ func NewClient(opts ...Option) (*Client, error) {
 	}
 
 	return c, nil
-}
-
-func (c *Client) CreateUser(ctx context.Context, user sqlc.CreateUserParams) (sqlc.User, error) {
-	return c.db.CreateUser(ctx, user)
 }

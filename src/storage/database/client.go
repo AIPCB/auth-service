@@ -1,7 +1,6 @@
 package database
 
 import (
-	"context"
 	"errors"
 
 	"github.com/AIPCB/auth-service/src/sqlc"
@@ -26,8 +25,4 @@ func NewClient(opts ...Option) (*Client, error) {
 
 	return c, nil
 
-}
-
-func (c *Client) CreateUser(ctx context.Context, user sqlc.CreateUserParams) (sqlc.User, error) {
-	return c.queries.CreateUser(ctx, user)
 }

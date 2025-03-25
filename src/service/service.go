@@ -1,10 +1,7 @@
 package service
 
 import (
-	"context"
 	"errors"
-
-	"github.com/AIPCB/auth-service/src/sqlc"
 )
 
 type Service struct {
@@ -23,10 +20,4 @@ func NewService(options ...Option) (*Service, error) {
 	}
 
 	return s, nil
-}
-
-// TODO: move service related logic here
-
-func (s *Service) RegisterUser(ctx context.Context, user sqlc.CreateUserParams) (sqlc.User, error) {
-	return s.storage.CreateUser(ctx, user)
 }
