@@ -18,6 +18,9 @@ type Server struct {
 
 	authService *service.Service
 	storage     storage.Client
+
+	jwtSecret     []byte
+	jwtExpiryTime time.Duration
 }
 
 func NewServer(opts ...Option) *Server {
