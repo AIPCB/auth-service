@@ -1,6 +1,10 @@
 package server
 
-import "github.com/golang-jwt/jwt"
+import (
+	"time"
+
+	"github.com/golang-jwt/jwt"
+)
 
 type Claims struct {
 	jwt.StandardClaims
@@ -9,7 +13,7 @@ type Claims struct {
 func (s *Server) GenerateToken() (string, error) {
 	claims := &Claims{
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: int64(s.jwtExpiryTime),
+			ExpiresAt: time.Now().Add(s.jwtExpiryTime).Unix(),
 		},
 	}
 
