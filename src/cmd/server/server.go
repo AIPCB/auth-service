@@ -3,8 +3,10 @@ package server
 import (
 	"context"
 	"log"
+	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/AIPCB/auth-service/src/cmd/config"
 	"github.com/AIPCB/auth-service/src/server"
@@ -39,6 +41,8 @@ func Execute() {
 
 	s := server.NewServer(
 		server.WithAuthService(authService),
+		server.WithJWTExpiryTime(time.Hour*24),
+		server.WithJWTSecret(os.Getenv("JWT_SECRET")),
 	)
 
 	go func() {
