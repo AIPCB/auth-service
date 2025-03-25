@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/AIPCB/auth-service/src/models"
-	"github.com/AIPCB/auth-service/src/sqlc"
 )
 
 // TODO: Prevent duplicate records
@@ -25,18 +24,8 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 			return
 		}
 
-		user, err := s.authService.RegisterUser(r.Context(), sqlc.CreateUserParams{
-			Username: req.Username,
-			Email:    req.Email,
-			Password: req.Password,
-		})
-		if err != nil {
-			http.Error(w, "internal server error", http.StatusInternalServerError)
-			return
-		}
-
 		response := models.RegisterResponse{
-			Message: fmt.Sprintf("Successfully registered user %s", user.Username),
+			Message: fmt.Sprintf("Successfully registered user"),
 		}
 
 		w.Header().Set("Content-Type", "application/json")
