@@ -1,6 +1,8 @@
 package server
 
 import (
+	"time"
+
 	"github.com/AIPCB/auth-service/src/service"
 	"github.com/AIPCB/auth-service/src/storage"
 )
@@ -16,5 +18,17 @@ func WithAuthService(authService *service.Service) Option {
 func WithStorage(storage storage.Client) Option {
 	return func(server *Server) {
 		server.storage = storage
+	}
+}
+
+func WithJWTSecret(secret string) Option {
+	return func(server *Server) {
+		server.jwtSecret = []byte(secret)
+	}
+}
+
+func WithJWTExpiryTime(expiryTime time.Duration) Option {
+	return func(server *Server) {
+		server.jwtExpiryTime = expiryTime
 	}
 }
