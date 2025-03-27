@@ -24,8 +24,18 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 			return
 		}
 
+		// todo: make call to user service to create user
+
+		token, err := s.GenerateToken()
+		if err != nil {
+			http.Error(w, "internal server error", http.StatusInternalServerError)
+			return
+		}
+
 		response := models.RegisterResponse{
-			Message: fmt.Sprintf("Successfully registered user"),
+			Message:     fmt.Sprintf("Successfully registered user"),
+			Success:     true,
+			AccessToken: token,
 		}
 
 		w.Header().Set("Content-Type", "application/json")
