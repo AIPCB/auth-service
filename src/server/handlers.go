@@ -3,6 +3,7 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/AIPCB/auth-service/src/models"
@@ -24,8 +25,19 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 			return
 		}
 
+		// todo: make call to user service to create user
+
+		token, err := s.GenerateToken()
+		if err != nil {
+			http.Error(w, "internal server error", http.StatusInternalServerError)
+			log.Printf("Error generating token: %v", err)
+			return
+		}
+
 		response := models.RegisterResponse{
-			Message: fmt.Sprintf("Successfully registered user"),
+			Message:     fmt.Sprintf("Successfully registered user"),
+			Success:     true,
+			AccessToken: token,
 		}
 
 		w.Header().Set("Content-Type", "application/json")
