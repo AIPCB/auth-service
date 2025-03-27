@@ -3,6 +3,7 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/AIPCB/auth-service/src/models"
@@ -29,6 +30,7 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 		token, err := s.GenerateToken()
 		if err != nil {
 			http.Error(w, "internal server error", http.StatusInternalServerError)
+			log.Printf("Error generating token: %v", err)
 			return
 		}
 
