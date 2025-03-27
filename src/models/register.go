@@ -24,5 +24,7 @@ func (rr *RegisterRequest) Validate() string {
 }
 
 type RegisterResponse struct {
-	Message string `json:"message"`
+	AccessToken string `json:"access_token"`
+	Success     bool   `json:"success"`
+	Message     string `json:"message"`
 }
