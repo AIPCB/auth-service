@@ -10,7 +10,7 @@ func TestLoginValidate(t *testing.T) {
 		expected string
 	}{
 		{
-			name:     "Valid email, username and password",
+			name:     "Valid email and password",
 			email:    "test@test.com",
 			password: "password",
 			expected: "",
