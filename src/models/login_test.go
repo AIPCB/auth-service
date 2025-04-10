@@ -6,28 +6,24 @@ func TestLoginValidate(t *testing.T) {
 	testCases := []struct {
 		name     string
 		email    string
-		username string
 		password string
 		expected string
 	}{
 		{
 			name:     "Valid email, username and password",
 			email:    "test@test.com",
-			username: "test",
 			password: "password",
 			expected: "",
 		},
 		{
 			name:     "Invalid email",
 			email:    "test",
-			username: "test",
 			password: "password",
 			expected: "Invalid email",
 		},
 		{
 			name:     "Invalid password",
 			email:    "test@test.com",
-			username: "test",
 			password: "",
 			expected: "Invalid password",
 		},
