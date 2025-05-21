@@ -3,7 +3,6 @@ package person
 import (
 	"context"
 	"errors"
-	"fmt"
 	"net/url"
 
 	"github.com/AIPCB/auth-service/src/models"
@@ -22,7 +21,7 @@ func NewPersonService(opts ...Option) (*PersonService, error) {
 	}
 
 	if s.url == nil {
-		return nil, errors.New("service: missing storage")
+		return nil, errors.New("service: missing PersonService URL")
 	}
 
 	s.client = httpclient.New(s.url.String())
@@ -37,7 +36,5 @@ func (s *PersonService) CreatePerson(ctx context.Context, req models.RegisterReq
 		return err
 	}
 
-	fmt.Println(resp)
 	return nil
-
 }
