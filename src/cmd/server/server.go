@@ -48,6 +48,11 @@ func Execute() {
 		}),
 	)
 
+	if err != nil {
+		log.Fatalf("Failed to create person service: %+v", err)
+		return
+	}
+
 	s := server.NewServer(
 		server.WithAuthService(authService),
 		server.WithPersonService(personService),
