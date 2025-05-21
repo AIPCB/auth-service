@@ -3,6 +3,7 @@ package server
 import (
 	"context"
 	"log"
+	"net/url"
 	"os"
 	"os/signal"
 	"syscall"
@@ -11,6 +12,7 @@ import (
 	"github.com/AIPCB/auth-service/src/cmd/config"
 	"github.com/AIPCB/auth-service/src/server"
 	"github.com/AIPCB/auth-service/src/service"
+	"github.com/AIPCB/auth-service/src/service/person"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -39,8 +41,16 @@ func Execute() {
 		return
 	}
 
+	personService, err := person.NewPersonService(
+		person.WithPersonServiceURL(&url.URL{
+			Scheme: "http",
+			Host:   os.Getenv("PERSON_SERVICE_HOST"),
+		}),
+	)
+
 	s := server.NewServer(
 		server.WithAuthService(authService),
+		server.WithPersonService(personService),
 		server.WithJWTExpiryTime(time.Hour*24),
 		server.WithJWTSecret(os.Getenv("JWT_SECRET")),
 	)
