@@ -1,3 +1,7 @@
+github.com/AIPCB/shared v0.0.1 h1:XT9FaAwxHqvvXNXOmihcO91O8UANDQ/4x29OrsrLXpk=
+github.com/AIPCB/shared v0.0.1/go.mod h1:KOjLWxajzXUiBEAurDUsiBlJywS0BKttEB6TDWMZ4Ss=
+github.com/AIPCB/shared v0.0.2 h1:0ipkvLjK2JApBKyp/zZEcbL6avzGcJ3+98s9KzDlFw0=
+github.com/AIPCB/shared v0.0.2/go.mod h1:KOjLWxajzXUiBEAurDUsiBlJywS0BKttEB6TDWMZ4Ss=
 github.com/exception-raised/validation-module v0.0.1 h1:KBf+85ISrWnnWIHhyqDSjdaRPzy5ICN+9lzMO/snFhE=
 github.com/exception-raised/validation-module v0.0.1/go.mod h1:i1qu2YAWuQopIgZIc8lX/kGoo5akPvjZa7LoEHF9bQM=
 github.com/golang-jwt/jwt v3.2.2+incompatible h1:IfV12K8xAKAnZqdXVzCZ+TOjboZ2keLg81eXfW3O+oY=
