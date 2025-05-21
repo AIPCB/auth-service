@@ -25,7 +25,12 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 			return
 		}
 
-		// todo: make call to user service to create user
+		err = s.personService.CreatePerson(r.Context(), req)
+		if err != nil {
+			http.Error(w, "internal server error", http.StatusInternalServerError)
+			log.Printf("Error creating person: %v", err)
+			return
+		}
 
 		token, err := s.GenerateToken()
 		if err != nil {

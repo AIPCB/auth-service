@@ -37,7 +37,7 @@ func TestRegisterValidate(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			rr := RegisterRequest{
 				Email:    tc.email,
-				Username: tc.username,
+				Name:     tc.username,
 				Password: tc.password,
 			}
 

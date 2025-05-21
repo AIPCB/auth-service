@@ -1,6 +1,6 @@
 module github.com/AIPCB/auth-service
 
-go 1.24.0
+go 1.24.2
 
 require (
 	github.com/exception-raised/validation-module v0.0.1
@@ -13,3 +13,5 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.10.9
 )
+
+require github.com/AIPCB/shared v0.0.2
