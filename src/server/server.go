@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/AIPCB/auth-service/src/service"
-	"github.com/AIPCB/auth-service/src/service/person"
 	"github.com/AIPCB/auth-service/src/storage"
 	"github.com/gorilla/mux"
 )
@@ -17,8 +16,8 @@ type Server struct {
 	httpreadtimeout  time.Duration
 	httpwritetimeout time.Duration
 
-	authService   *service.Service
-	personService *person.PersonService
+	authService   Service
+	personService service.PersonService
 	storage       storage.Client
 
 	jwtSecret     []byte

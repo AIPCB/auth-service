@@ -7,6 +7,12 @@ type LoginRequest struct {
 	Password string `json:"password"`
 }
 
+type LoginResponse struct {
+	AccessToken string `json:"access_token"`
+	Success     bool   `json:"success"`
+	Message     string `json:"message"`
+}
+
 func (rr *LoginRequest) Validate() string {
 	if !validator.IsValidEmail(rr.Email) {
 		return "Invalid email"
