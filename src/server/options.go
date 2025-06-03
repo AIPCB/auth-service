@@ -4,11 +4,13 @@ import (
 	"time"
 
 	"github.com/AIPCB/auth-service/src/service"
-	"github.com/AIPCB/auth-service/src/service/person"
 	"github.com/AIPCB/auth-service/src/storage"
 )
 
 type Option func(*Server)
+
+type Service interface {
+}
 
 func WithAuthService(authService *service.Service) Option {
 	return func(server *Server) {
@@ -16,7 +18,7 @@ func WithAuthService(authService *service.Service) Option {
 	}
 }
 
-func WithPersonService(personService *person.PersonService) Option {
+func WithPersonService(personService service.PersonService) Option {
 	return func(server *Server) {
 		server.personService = personService
 	}
