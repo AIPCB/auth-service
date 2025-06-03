@@ -30,12 +30,6 @@ func (s *Server) RegisterHandler() http.HandlerFunc {
 			return
 		}
 
-		if errorMsg != "" {
-			http.Error(w, errorMsg, http.StatusBadRequest)
-			log.Printf("Validation error: %s", errorMsg)
-			return
-		}
-
 		err = s.personService.CreatePerson(ctx, req)
 		if err != nil {
 			http.Error(w, "internal server error", http.StatusInternalServerError)
