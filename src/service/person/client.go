@@ -42,8 +42,8 @@ func (s *PersonService) CreatePerson(ctx context.Context, req models.RegisterReq
 
 func (s *PersonService) GetPerson(ctx context.Context, id string) (*models.Person, error) {
 	resp := &models.Person{}
-	url := fmt.Sprintf("person/%s", id)
-	err := s.client.DoRequest(ctx, "GET", url, nil, resp)
+	endpoint := fmt.Sprintf("person/%s", id)
+	err := s.client.DoRequest(ctx, "GET", endpoint, nil, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -53,8 +53,8 @@ func (s *PersonService) GetPerson(ctx context.Context, id string) (*models.Perso
 
 func (s *PersonService) GetPersonByEmail(ctx context.Context, email string) (*models.Person, error) {
 	resp := &models.Person{}
-	url := fmt.Sprintf("person/by-email/%s", url.QueryEscape(email))
-	err := s.client.DoRequest(ctx, "GET", url, nil, resp)
+	endpoint := fmt.Sprintf("person/by-email/%s", url.QueryEscape(email))
+	err := s.client.DoRequest(ctx, "GET", endpoint, nil, resp)
 	if err != nil {
 		return nil, err
 	}
