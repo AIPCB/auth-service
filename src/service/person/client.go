@@ -3,6 +3,7 @@ package person
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/url"
 
 	"github.com/AIPCB/auth-service/src/models"
@@ -37,4 +38,26 @@ func (s *PersonService) CreatePerson(ctx context.Context, req models.RegisterReq
 	}
 
 	return nil
+}
+
+func (s *PersonService) GetPerson(ctx context.Context, id string) (*models.Person, error) {
+	resp := &models.Person{}
+	url := fmt.Sprintf("person/%s", id)
+	err := s.client.DoRequest(ctx, "GET", url, nil, resp)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
+}
+
+func (s *PersonService) GetPersonByEmail(ctx context.Context, email string) (*models.Person, error) {
+	resp := &models.Person{}
+	url := fmt.Sprintf("person/by-email/%s", url.QueryEscape(email))
+	err := s.client.DoRequest(ctx, "GET", url, nil, resp)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
 }
